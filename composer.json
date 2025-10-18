@@ -3,7 +3,7 @@
   "description": "A base Symfony 7.3 project template with Latte templating",
   "type": "project",
   "license": "GPL-3.0-or-later",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
@@ -32,7 +32,7 @@
     "badge": "./vendor/bin/badger badge:version . && ./vendor/bin/badger badge:license .",
     "post-create-project-cmd": [
       "@php -r \"copy('.env.template', '.env');\"",
-      "@php bin/setup.php"
+      "@php bin/setup"
     ]
   },
   "require-dev": {
