@@ -1,32 +1,41 @@
 #!/usr/bin/env php
 <?php
 
-echo "\n\033[1;34m╔════════════════════════════════════════╗\033[0m\n";
-echo "\033[1;34m║  Symfony Base Project Setup           ║\033[0m\n";
-echo "\033[1;34m╚════════════════════════════════════════╝\033[0m\n\n";
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Helper\QuestionHelper;
+
+require __DIR__.'/../vendor/autoload.php';
+
+$input = new ArgvInput();
+$output = new ConsoleOutput();
+$helper = new QuestionHelper();
+
+$output->writeln('');
+$output->writeln('<fg=blue;options=bold>╔════════════════════════════════════════╗</>');
+$output->writeln('<fg=blue;options=bold>║  Symfony Base Project Setup           ║</>');
+$output->writeln('<fg=blue;options=bold>╚════════════════════════════════════════╝</>');
+$output->writeln('');
 
 // Prompt for project name
-echo "\033[1;33mEnter your project name:\033[0m ";
-$projectName = trim(fgets(STDIN));
-
-if (empty($projectName)) {
-    $projectName = 'My Symfony App';
-    echo "\033[0;33mUsing default name: {$projectName}\033[0m\n";
-}
+$question = new Question('<fg=yellow>Enter your project name:</> ', 'My Symfony App');
+$projectName = $helper->ask($input, $output, $question);
 
 // Prompt for vendor/package name
-echo "\033[1;33mEnter your composer package name (vendor/package):\033[0m ";
-$packageName = trim(fgets(STDIN));
-
-if (empty($packageName) || !preg_match('/^[a-z0-9\-]+\/[a-z0-9\-]+$/', $packageName)) {
-    $packageName = 'myvendor/myproject';
-    echo "\033[0;33mUsing default package name: {$packageName}\033[0m\n";
-}
+$question = new Question('<fg=yellow>Enter your composer package name (vendor/package):</> ', 'myvendor/myproject');
+$question->setValidator(function ($answer) {
+    if (!preg_match('/^[a-z0-9\-]+\/[a-z0-9\-]+$/', $answer)) {
+        $answer = 'myvendor/myproject';
+    }
+    return $answer;
+});
+$packageName = $helper->ask($input, $output, $question);
 
 // Update .env file
 $envFile = __DIR__ . '/../.env';
 if (!file_exists($envFile)) {
-    echo "\033[0;31mError: .env file not found!\033[0m\n";
+    $output->writeln('<error>Error: .env file not found!</error>');
     exit(1);
 }
 
@@ -41,7 +50,7 @@ file_put_contents($envFile, $envContent);
 // Update composer.json
 $composerFile = __DIR__ . '/../composer.json';
 if (!file_exists($composerFile)) {
-    echo "\033[0;31mError: composer.json file not found!\033[0m\n";
+    $output->writeln('<error>Error: composer.json file not found!</error>');
     exit(1);
 }
 
@@ -60,15 +69,19 @@ if (isset($composerData['scripts']['post-create-project-cmd'])) {
 
 file_put_contents($composerFile, json_encode($composerData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
 
-echo "\n\033[1;32m✓ Project created successfully!\033[0m\n";
-echo "\033[0;32m✓ APP_NAME set to: {$projectName}\033[0m\n";
-echo "\033[0;32m✓ Composer package set to: {$packageName}\033[0m\n";
-echo "\033[0;32m✓ Version set to: 1.0.0\033[0m\n\n";
-echo "\033[1;36mNext steps:\033[0m\n";
-echo "  1. Update other settings in .env file\n";
-echo "  2. Run: \033[1mphp bin/console server:start\033[0m\n";
-echo "  3. Visit: \033[1mhttp://localhost:8000\033[0m\n\n";
-echo "\033[0;90mHappy coding! 🚀\033[0m\n\n";
+$output->writeln('');
+$output->writeln('<fg=green;options=bold>✓ Project created successfully!</>');
+$output->writeln("<fg=green>✓ APP_NAME set to: {$projectName}</>");
+$output->writeln("<fg=green>✓ Composer package set to: {$packageName}</>");
+$output->writeln('<fg=green>✓ Version set to: 1.0.0</>');
+$output->writeln('');
+$output->writeln('<fg=cyan;options=bold>Next steps:</>');
+$output->writeln('  1. Update other settings in .env file');
+$output->writeln('  2. Run: <options=bold>php bin/console server:start</>');
+$output->writeln('  3. Visit: <options=bold>http://localhost:8000</>');
+$output->writeln('');
+$output->writeln('<fg=gray>Happy coding! 🚀</>');
+$output->writeln('');
 
 // Clean up setup files
 $setupScript = __FILE__;
