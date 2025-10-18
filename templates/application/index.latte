@@ -43,32 +43,30 @@
             font-size: 1rem;
             color: #6c757d;
             line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        p:last-of-type {
             margin-bottom: 2.5rem;
         }
-        .links {
+        .status {
             display: flex;
-            gap: 0.75rem;
+            gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
             margin-bottom: 2.5rem;
+            flex-wrap: wrap;
         }
-        .links a {
-            padding: 0.625rem 1.25rem;
-            background: #2c3e50;
-            color: white;
-            text-decoration: none;
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
             border-radius: 0.25rem;
-            transition: all 0.2s ease;
             font-size: 0.875rem;
-            font-weight: 500;
+            color: #6c757d;
         }
-        .links a:hover {
-            background: #1a252f;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
         }
         .footer {
             padding-top: 2rem;
@@ -81,14 +79,19 @@
 <body>
 <div class="container">
     <h1>🎯 {$_ENV['APP_NAME']}</h1>
-    <p>Welcome to your application!</p>
-    <p>Your project is now up and running.</p>
-    <div class="links">
-        <a href="https://symfony.com/doc" target="_blank">Documentation</a>
-        <a href="https://symfony.com/community" target="_blank">Community</a>
+    <p>Welcome to your new Symfony application.</p>
+    <div class="status">
+        <div class="status-item">
+            <span class="status-dot"></span>
+            <span>Application Ready</span>
+        </div>
+        <div class="status-item">
+            <span class="status-dot"></span>
+            <span>Services Active</span>
+        </div>
     </div>
     <div class="footer">
-        <p>Built with the Symfony Framework</p>
+        <p>Built with Symfony Framework</p>
     </div>
 </div>
 </body>
