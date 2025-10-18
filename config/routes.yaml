@@ -1,0 +1,11 @@
+Application:
+  resource:
+    path: ../src/Application/Controller/
+    namespace: App\Application\Controller
+  type: attribute
+
+Auth:
+  resource:
+    path: ../src/Auth/Controller/
+    namespace: App\Auth\Controller
+  type: sttribute
