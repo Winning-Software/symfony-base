@@ -8,4 +8,4 @@ Auth:
   resource:
     path: ../src/Auth/Controller/
     namespace: App\Auth\Controller
-  type: sttribute
+  type: attribute
