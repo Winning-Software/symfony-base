@@ -3,6 +3,7 @@
     "description": "A base Symfony 7.3 project template with Latte templating",
     "type": "project",
     "license": "GPL-3.0-or-later",
+    "version": "1.0.0",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
