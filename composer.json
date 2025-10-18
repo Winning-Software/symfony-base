@@ -1,6 +1,8 @@
 {
+    "name": "cloudbase/symfony-base",
+    "description": "A base Symfony 7.3 project template with Latte templating",
     "type": "project",
-    "license": "proprietary",
+    "license": "GPL-3.0-or-later",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
@@ -17,11 +19,18 @@
     "config": {
         "allow-plugins": {
             "symfony/runtime": true
-        }
+        },
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php -r \"copy('.env.template', '.env');\"",
+            "@php bin/setup.php"
+        ]
     }
 }

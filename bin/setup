@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+<?php
+
+echo "\n\033[1;34m╔════════════════════════════════════════╗\033[0m\n";
+echo "\033[1;34m║  Symfony Base Project Setup           ║\033[0m\n";
+echo "\033[1;34m╚════════════════════════════════════════╝\033[0m\n\n";
+
+echo "\033[1;33mEnter your project name:\033[0m ";
+$projectName = trim(fgets(STDIN));
+
+if (empty($projectName)) {
+    $projectName = 'My Symfony App';
+    echo "\033[0;33mUsing default name: {$projectName}\033[0m\n";
+}
+
+$envFile = __DIR__ . '/../.env';
+if (!file_exists($envFile)) {
+    echo "\033[0;31mError: .env file not found!\033[0m\n";
+    exit(1);
+}
+
+$envContent = file_get_contents($envFile);
+
+$envContent = preg_replace(
+    '/^APP_NAME=.*$/m',
+    'APP_NAME="' . addslashes($projectName) . '"',
+    $envContent
+);
+
+file_put_contents($envFile, $envContent);
+
+echo "\n\033[1;32m✓ Project created successfully!\033[0m\n";
+echo "\033[0;32m✓ APP_NAME set to: {$projectName}\033[0m\n\n";
+echo "\033[1;36mNext steps:\033[0m\n";
+echo "  1. Update other settings in .env file\n";
+echo "  2. Run: \033[1mphp bin/console server:start\033[0m\n";
+echo "  3. Visit: \033[1mhttp://localhost:8000\033[0m\n\n";
+echo "\033[0;90mHappy coding! 🚀\033[0m\n\n";
+
+$setupScript = __FILE__;
+$envTemplate = __DIR__ . '/../.env.template';
+
+if (file_exists($envTemplate)) {
+    unlink($envTemplate);
+}
+
+if (file_exists($setupScript)) {
+    unlink($setupScript);
+}
