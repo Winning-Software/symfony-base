@@ -14,7 +14,7 @@ $helper = new QuestionHelper();
 
 $output->writeln('');
 $output->writeln('<fg=blue;options=bold>╔════════════════════════════════════════╗</>');
-$output->writeln('<fg=blue;options=bold>║  Symfony Base Project Setup           ║</>');
+$output->writeln('<fg=blue;options=bold>║  Symfony Base Project Setup            ║</>');
 $output->writeln('<fg=blue;options=bold>╚════════════════════════════════════════╝</>');
 $output->writeln('');
 
@@ -74,11 +74,6 @@ $output->writeln('<fg=green;options=bold>✓ Project created successfully!</>');
 $output->writeln("<fg=green>✓ APP_NAME set to: {$projectName}</>");
 $output->writeln("<fg=green>✓ Composer package set to: {$packageName}</>");
 $output->writeln('<fg=green>✓ Version set to: 1.0.0</>');
-$output->writeln('');
-$output->writeln('<fg=cyan;options=bold>Next steps:</>');
-$output->writeln('  1. Update other settings in .env file');
-$output->writeln('  2. Run: <options=bold>php bin/console server:start</>');
-$output->writeln('  3. Visit: <options=bold>http://localhost:8000</>');
 $output->writeln('');
 $output->writeln('<fg=gray>Happy coding! 🚀</>');
 $output->writeln('');
