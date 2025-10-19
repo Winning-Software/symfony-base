@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity;
 
+use App\Application\Entity\AbstractBaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'tblUser', schema: 'Auth')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    protected ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, unique: true, nullable: false)]
     private string $email;
 
+    #[ORM\Column(name: 'bolActive', type: 'boolean', nullable: false)]
+    private bool $isActive;
+
+    #[ORM\Column(name: 'bolVerified', type: 'boolean', nullable: false)]
+    private bool $isVerified;
+
     /**
-     * @var list<string> The user roles
+     * @var string[]
      */
-    #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'strPassword', length: 255, nullable: false, options: ['comment' => 'Hashed password'])]
     private string $password;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getEmail(): string
     {
@@ -74,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param list<string> $roles
+     * @param string[] $roles
      */
     public function setRoles(array $roles): static
     {
@@ -103,5 +104,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): void
+    {
+        $this->isVerified = $isVerified;
     }
 }

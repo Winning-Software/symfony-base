@@ -6,20 +6,19 @@ namespace App\Application\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 
-class BaseEntity
+abstract class AbstractBaseEntity
 {
     protected ?int $id = null;
 
-    #[Column(name: 'dtmCreatedAt', type: 'datetime')]
+    #[Column(name: 'dtmCreated', type: 'datetime')]
     protected \DateTimeInterface $createdAt;
 
-    #[Column(name: 'dtmUpdatedAt', type: 'datetime')]
-    protected \DateTimeInterface $updatedAt;
+    #[Column(name: 'dtmUpdated', type: 'datetime')]
+    protected ?\DateTimeInterface $updatedAt = null;
 
     protected function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -37,7 +36,7 @@ class BaseEntity
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
