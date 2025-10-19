@@ -2,7 +2,7 @@
 
 <p>
 <!-- Version Badge -->
-<img src="https://img.shields.io/badge/Version-0.4.1-blue" alt="Version 0.4.1">
+<img src="https://img.shields.io/badge/Version-0.5.0-blue" alt="Version 0.5.0">
 <!-- License Badge -->
 <img src="https://img.shields.io/badge/License-GPL--3.0--or--later-40adbc" alt="License GPL-3.0-or-later">
 </p>
