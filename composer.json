@@ -3,17 +3,22 @@
   "description": "A base Symfony 7.3 project template with Latte templating",
   "type": "project",
   "license": "GPL-3.0-or-later",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
     "php": ">=8.3",
+    "cloudbase/latte-helper": "^0.1.2",
+    "doctrine/dbal": "^4.3",
+    "doctrine/doctrine-bundle": "^2.18",
+    "doctrine/doctrine-migrations-bundle": "^3.5",
+    "doctrine/orm": "^3.5",
     "symfony/console": "7.3.*",
     "symfony/dotenv": "7.3.*",
     "symfony/framework-bundle": "7.3.*",
     "symfony/runtime": "7.3.*",
-    "symfony/yaml": "7.3.*",
-    "cloudbase/latte-helper": "^0.1.2"
+    "symfony/security-bundle": "^7.3",
+    "symfony/yaml": "7.3.*"
   },
   "config": {
     "allow-plugins": {
@@ -30,6 +35,9 @@
     "stan": "./vendor/bin/phpstan analyse -c phpstan.neon",
     "badge": "./vendor/bin/badger badge:version . && ./vendor/bin/badger badge:license .",
     "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
+    "db:create": "@php bin/console doctrine:database:create",
+    "db:drop": "@php bin/console doctrine:database:drop --force",
+    "db:migrate": "@php bin/console doctrine:migrations:migrate --no-interaction",
     "post-create-project-cmd": [
       "@php -r \"copy('.env.template', '.env');\"",
       "@php bin/setup"
@@ -38,6 +46,7 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.89",
     "loomsoftware/badger": "^1.0",
-    "phpstan/phpstan": "^2.1"
+    "phpstan/phpstan": "^2.1",
+    "phpstan/phpstan-doctrine": "^2.0"
   }
 }
