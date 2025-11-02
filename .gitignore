@@ -3,5 +3,7 @@
 /.env.dev
 /var/
 /vendor/
+/node_modules/
 /composer.lock
 /.php-cs-fixer.cache
+/public/assets/
