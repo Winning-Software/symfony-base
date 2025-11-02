@@ -1,7 +1,5 @@
-DROP SCHEMA IF EXISTS Application;
 DROP SCHEMA IF EXISTS Auth;
 
-CREATE SCHEMA Application;
 CREATE SCHEMA Auth;
 
 USE Auth;
@@ -19,4 +17,4 @@ CREATE TABLE tblUser (
     INDEX I_tblUser_bolActive (bolActive),
     INDEX I_tblUser_bolVerified (bolVerified),
     INDEX I_tblUser_dtmCreated (dtmCreated)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

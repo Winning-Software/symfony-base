@@ -5,8 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const entries = {
-    // 'app-core': './assets/scripts/app.ts',
-    // 'app-styles': './assets/styles/app.scss',
     app: './assets/scripts/app.ts',
     styles: './assets/styles/app.scss',
 }

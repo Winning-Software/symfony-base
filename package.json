@@ -1,6 +1,4 @@
 {
-  "name": "bookshelf",
-  "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode=production",
     "dev": "webpack --config webpack.config.js --mode=development",
