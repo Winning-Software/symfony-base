@@ -1,0 +1,45 @@
+{layout '../@auth.layout.latte'}
+
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+{varType Symfony\Component\Form\FormView $form}
+{varType App\Auth\Classes\DTO\RegistrationDTO $data}
+
+{block content}
+    <form method="post" class="space-y-5">
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   name="registration_form[email]"
+                   placeholder="Email Address"
+                   value="{$data->getEmail()}"
+                   required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="registration_form_password">Password</label>
+            <input type="password"
+                   id="registration_form_password"
+                   name="registration_form[password]"
+                   placeholder="Password"
+                   required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="registration_form_confirm_password">Password</label>
+            <input type="password"
+                   id="registration_form_confirm_password"
+                   name="registration_form[confirm_password]"
+                   placeholder="Repeat Password"
+                   required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+        </div>
+
+        <input type="hidden" name="registration_form[_token]" value="{$app->getCsrf('registration_form')}">
+
+        <button type="submit"
+                class="w-full py-2 px-4 cursor-pointer bg-green-600 text-white rounded-lg hover:bg-green-700">
+            Register
+        </button>
+    </form>
+{/block}

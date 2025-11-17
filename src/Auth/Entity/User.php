@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Auth\Entity;
 
 use App\Application\Entity\AbstractBaseEntity;
+use App\Auth\Classes\DTO\RegistrationDTO;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -15,11 +17,14 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'intUserId', type: 'integer', options: ['unsigned' => true])]
     protected ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true, nullable: false)]
+    #[ORM\Column(name: 'strEmail', length: 180, unique: true, nullable: false)]
     private string $email;
+
+    #[ORM\Column(name: 'strPassword', length: 255, nullable: false, options: ['comment' => 'Hashed password'])]
+    private string $password;
 
     #[ORM\Column(name: 'bolActive', type: 'boolean', nullable: false)]
     private bool $isActive;
@@ -32,19 +37,26 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
      */
     private array $roles = [];
 
-    #[ORM\Column(name: 'strPassword', length: 255, nullable: false, options: ['comment' => 'Hashed password'])]
-    private string $password;
+    public static function create(RegistrationDTO $dto, UserPasswordHasherInterface $passwordHasher): self
+    {
+        $user = new self();
+
+        $user->setEmail($dto->getEmail());
+        $user->setPassword($passwordHasher->hashPassword($user, $dto->getPassword()));
+        $user->activate();
+        $user->unverify();
+
+        return $user;
+    }
 
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -77,11 +89,9 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
     /**
      * @param string[] $roles
      */
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): void
     {
         $this->roles = $roles;
-
-        return $this;
     }
 
     /**
@@ -92,18 +102,9 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): void
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
     }
 
     public function isActive(): bool
@@ -111,9 +112,14 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): void
+    public function activate(): void
     {
-        $this->isActive = $isActive;
+        $this->isActive = true;
+    }
+
+    public function deactivate(): void
+    {
+        $this->isActive = false;
     }
 
     public function isVerified(): bool
@@ -121,8 +127,17 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): void
+    public function verify(): void
     {
-        $this->isVerified = $isVerified;
+        $this->isVerified = true;
+    }
+
+    public function unverify(): void
+    {
+        $this->isVerified = false;
+    }
+
+    public function eraseCredentials(): void
+    {
     }
 }

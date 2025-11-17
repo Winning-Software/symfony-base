@@ -1,3 +1,6 @@
+{varType array $_ENV}
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +13,9 @@
 <div class="text-center bg-white/80 rounded-lg shadow-lg px-4 py-8 max-w-[400px] w-full">
     <h1 class="text-3xl mb-6 font-bold">🎯 {$_ENV['APP_NAME']}</h1>
     <p class="my-3">Welcome to your new Symfony application.</p>
+    <div n:if="$app->getUser()">
+        Logged in as <strong>{$app->getUser()->getUserIdentifier()}</strong>.
+    </div>
     <div class="mt-6 pt-6 text-sm border-t border-gray-700">
         <p>Built with the Symfony Framework</p>
     </div>

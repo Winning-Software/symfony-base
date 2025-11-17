@@ -1,5 +1,12 @@
 @use 'tailwindcss';
 
+@theme {
+  --color-message-success: #42a04b;
+  --color-message-error: #e47070;
+  --color-message-info: #508ac8;
+  --color-message-warning: #ff9426;
+}
+
 @layer utilities {
   .bg-animated-gradient {
     background: linear-gradient(-45deg, theme('colors.indigo.900'), theme('colors.indigo.700'), theme('colors.purple.800'), theme('colors.violet.500'), theme('colors.teal.400'));

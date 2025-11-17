@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractApplicationController
 {
-    #[Route('/')]
+    #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        return $this->renderTemplate('index');
+        return $this->renderTemplate('application/index');
     }
 }

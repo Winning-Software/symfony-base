@@ -1,0 +1,34 @@
+{layout '../@auth.layout.latte'}
+
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+
+{block content}
+    <form method="post" class="space-y-5">
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="username">Email</label>
+            <input type="email"
+                   name="email"
+                   id="username"
+                   placeholder="Email Address"
+                   value="{$lastUsername}"
+                   required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700" for="password">Password</label>
+            <input type="password"
+                   id="password"
+                   name="password"
+                   placeholder="Password"
+                   required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{$app->getCsrf('authenticate')}">
+
+        <button type="submit"
+                class="w-full py-2 px-4 cursor-pointer bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Login
+        </button>
+    </form>
+{/block}

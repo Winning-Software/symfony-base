@@ -8,5 +8,5 @@ use CloudBase\LatteHelper\Controller\AbstractLatteController;
 
 class AbstractApplicationController extends AbstractLatteController
 {
-    protected string $templateDir = '/templates/application';
+    protected string $templateDir = '/templates';
 }

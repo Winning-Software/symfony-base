@@ -16,7 +16,7 @@ abstract class AbstractBaseEntity
     #[Column(name: 'dtmUpdated', type: 'datetime')]
     protected ?\DateTimeInterface $updatedAt = null;
 
-    protected function __construct()
+    public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
