@@ -24,10 +24,9 @@ class RegistrationDTO
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-        return $this;
     }
 
     public function getPassword(): string
@@ -35,10 +34,9 @@ class RegistrationDTO
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): void
     {
         $this->password = $password;
-        return $this;
     }
 
     public function getConfirmPassword(): string
@@ -46,10 +44,9 @@ class RegistrationDTO
         return $this->confirmPassword;
     }
 
-    public function setConfirmPassword(string $confirmPassword): static
+    public function setConfirmPassword(string $confirmPassword): void
     {
         $this->confirmPassword = $confirmPassword;
-        return $this;
     }
 
     public function passwordsMatch(): bool
