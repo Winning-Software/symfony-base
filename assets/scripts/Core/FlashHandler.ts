@@ -1,6 +1,6 @@
 export default class FlashHandler
 {
-    private static DEFAULT_TIMEOUT: number = 3000;
+    private static DEFAULT_TIMEOUT: number = 4000;
     private static DEFAULT_DELAY: number = 500;
 
     private flashes: NodeListOf<HTMLElement>;

@@ -18,3 +18,15 @@ CREATE TABLE tblUser (
     INDEX I_tblUser_bolVerified (bolVerified),
     INDEX I_tblUser_dtmCreated (dtmCreated)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE tblVerificationToken (
+    intVerificationTokenId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    intUserId INT UNSIGNED NOT NULL,
+    strToken VARCHAR(100) NOT NULL,
+    dtmExpires DATETIME NOT NULL,
+    dtmCreated DATETIME NOT NULL DEFAULT NOW(),
+    dtmUpdated DATETIME ON UPDATE NOW(),
+    PRIMARY KEY (intVerificationTokenId),
+    UNIQUE KEY UK_tblVerificationToken_strToken (strToken),
+    INDEX I_tblVerificationToken_intUserId (intUserId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

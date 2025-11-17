@@ -6,11 +6,11 @@ namespace App\Auth\Controller;
 
 use App\Application\Controller\AbstractApplicationController;
 use App\Auth\Classes\DTO\RegistrationDTO;
+use App\Auth\Classes\Email\EmailVerificationService;
 use App\Auth\Entity\User;
 use App\Auth\Form\RegistrationForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -22,7 +22,8 @@ class RegistrationController extends AbstractApplicationController
     public function register(
         Request $request,
         EntityManagerInterface $em,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        EmailVerificationService $verificationService
     ): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_index');
@@ -52,8 +53,12 @@ class RegistrationController extends AbstractApplicationController
                     throw new \Exception('Email is already in use');
                 }
 
-                $em->persist(User::create($data, $passwordHasher));
+                $user = User::create($data, $passwordHasher);
+
+                $em->persist($user);
                 $em->flush();
+
+                $verificationService->sendVerificationEmail($user);
 
                 $this->addFlash('success', 'Account created. You can now log in.');
 
