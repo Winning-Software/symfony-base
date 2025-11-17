@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Application\Entity;
 
 use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 abstract class AbstractBaseEntity
 {
     protected ?int $id = null;
@@ -15,11 +17,6 @@ abstract class AbstractBaseEntity
 
     #[Column(name: 'dtmUpdated', type: 'datetime')]
     protected ?\DateTimeInterface $updatedAt = null;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
 
     public function getId(): ?int
     {
@@ -44,5 +41,15 @@ abstract class AbstractBaseEntity
     public function setUpdatedAt(\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function prePersist(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function preUpdate(): void
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

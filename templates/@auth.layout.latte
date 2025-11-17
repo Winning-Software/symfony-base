@@ -14,7 +14,7 @@
 
     <div class="min-h-screen flex items-center justify-center bg-gray-100">
         <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-            <h1 class="text-2xl font-bold mb-6">{$title}</h1>
+            <h1 class="text-2xl font-bold mb-6">{$title ?? 'N/A'}</h1>
 
             {block content}{/block}
         </div>

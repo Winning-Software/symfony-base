@@ -30,3 +30,15 @@ CREATE TABLE tblVerificationToken (
     UNIQUE KEY UK_tblVerificationToken_strToken (strToken),
     INDEX I_tblVerificationToken_intUserId (intUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE tblPasswordResetToken (
+    intPasswordResetTokenId INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    intUserId INT UNSIGNED NOT NULL,
+    strToken VARCHAR(100) NOT NULL,
+    dtmExpires DATETIME NOT NULL,
+    dtmCreated DATETIME NOT NULL DEFAULT NOW(),
+    dtmUpdated DATETIME ON UPDATE NOW(),
+    PRIMARY KEY (intPasswordResetTokenId),
+    UNIQUE KEY UK_tblPasswordResetToken_strToken (strToken),
+    INDEX I_tblPasswordResetToken_intUserId (intUserId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
