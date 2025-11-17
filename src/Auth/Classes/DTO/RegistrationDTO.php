@@ -19,6 +19,8 @@ class RegistrationDTO
     #[Assert\NotBlank]
     private string $confirmPassword = '';
 
+    private bool $userExists = false;
+
     public function getEmail(): string
     {
         return $this->email;
@@ -52,5 +54,20 @@ class RegistrationDTO
     public function passwordsMatch(): bool
     {
         return $this->password === $this->confirmPassword;
+    }
+
+    public function userExists(): bool
+    {
+        return $this->userExists;
+    }
+
+    public function setUserExists(bool $userExists): void
+    {
+        $this->userExists = $userExists;
+    }
+
+    public function validate(): bool
+    {
+        return $this->passwordsMatch() && !$this->userExists();
     }
 }

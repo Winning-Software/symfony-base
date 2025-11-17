@@ -6,6 +6,7 @@ namespace App\Auth\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Application\Entity\AbstractBaseEntity;
+use Random\RandomException;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'tblVerificationToken', schema: 'Auth')]
@@ -26,6 +27,9 @@ class VerificationToken extends AbstractBaseEntity
     #[ORM\Column(name: 'dtmExpires', type: 'datetime')]
     private \DateTimeInterface $expiresAt;
 
+    /**
+     * @throws RandomException
+     */
     public static function create(User $user): self
     {
         $self = new self();

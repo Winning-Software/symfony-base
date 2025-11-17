@@ -14,7 +14,7 @@
                    placeholder="Email Address"
                    value="{$data->getEmail()}"
                    required
-                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+                   class="mt-1 block w-full rounded-md border {if $data->userExists()}border-red-500{else}border-gray-200{/if} shadow-sm p-2" />
         </div>
         <div>
             <label class="block text-sm font-medium text-gray-700" for="registration_form_password">Password</label>
@@ -23,7 +23,8 @@
                    name="registration_form[password]"
                    placeholder="Password"
                    required
-                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+                   class="mt-1 block w-full rounded-md shadow-sm p-2 border {if count($form['password']->vars['errors'])}border-red-500{else}border-gray-200{/if}" />
+            <div n:foreach="$form['password']->vars['errors'] as $error" class="mt-2 text-sm text-red-500 mt-1">{$error->getMessage()}</div>
         </div>
         <div>
             <label class="block text-sm font-medium text-gray-700" for="registration_form_confirm_password">Password</label>
@@ -32,7 +33,8 @@
                    name="registration_form[confirm_password]"
                    placeholder="Repeat Password"
                    required
-                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
+                   class="mt-1 block w-full rounded-md border {if !$data->passwordsMatch()}border-red-500{else}border-gray-200{/if} shadow-sm p-2" />
+            <div n:if="!$data->passwordsMatch()" class="mt-2 text-sm text-red-500 mt-1">Passwords do not match</div>
         </div>
 
         <input type="hidden" name="registration_form[_token]" value="{$app->getCsrf('registration_form')}">

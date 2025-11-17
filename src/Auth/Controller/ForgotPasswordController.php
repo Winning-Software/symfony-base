@@ -15,8 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ForgotPasswordController extends AbstractApplicationController
 {
-    #[Route('/auth/forgot-password', name: 'auth_forgot_password')]
-    public function request(Request $request, EntityManagerInterface $em, PasswordResetService $service): Response
+    #[Route('/auth/password-reset/request', name: 'auth_forgot_password')]
+    public function requestNewPassword(Request $request, EntityManagerInterface $em, PasswordResetService $service): Response
     {
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
@@ -30,7 +30,9 @@ class ForgotPasswordController extends AbstractApplicationController
             return $this->redirectToRoute('auth_login');
         }
 
-        return $this->renderTemplate('auth/forgot-password.latte', []);
+        return $this->renderTemplate('auth/forgot-password.latte', [
+            'title' => 'Request Password Reset',
+        ]);
     }
 
     #[Route('/auth/reset-password', name: 'auth_reset_password')]

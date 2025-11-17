@@ -6,7 +6,11 @@ namespace App\Application\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\MappedSuperclass;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
 
+#[MappedSuperclass]
 #[HasLifecycleCallbacks]
 abstract class AbstractBaseEntity
 {
@@ -43,11 +47,13 @@ abstract class AbstractBaseEntity
         $this->updatedAt = $updatedAt;
     }
 
+    #[PrePersist]
     public function prePersist(): void
     {
         $this->createdAt = new \DateTime();
     }
 
+    #[PreUpdate]
     public function preUpdate(): void
     {
         $this->updatedAt = new \DateTime();
