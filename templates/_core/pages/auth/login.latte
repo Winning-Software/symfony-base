@@ -1,0 +1,22 @@
+{layout '../../layouts/@auth.layout.latte'}
+
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+{varType App\Auth\Classes\DTO\LoginDTO $data}
+
+{block content}
+    <p class="my-3 text-center">
+        Welcome back. Sign in to your account or <a href="{$app->generateUrl('auth_register')}" class="text-white font-medium hover:underline">create a new account</a>.
+    </p>
+    <form method="post" class="space-y-5 mt-6">
+        {include '../../components/form-errors.latte', form: $form}
+        {include '../../components/form-field.latte', type: 'email', field: $form['email']}
+        {include '../../components/form-field.latte', type: 'password', field: $form['password']}
+        {include '../../components/csrf-field.latte', form: $form}
+        {include '../../components/submit-button.latte', text: 'Login'}
+    </form>
+    <div>
+        <p class="my-3 text-center">
+            Forgotten your password? <a href="{$app->generateUrl('auth_forgot_password')}" class="text-white font-medium hover:underline">Reset Password</a>.
+        </p>
+    </div>
+{/block}

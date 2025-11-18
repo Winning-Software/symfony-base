@@ -1,0 +1,6 @@
+<div n:foreach="$form->vars['errors'] as $error">
+    {varType Symfony\Component\Form\FormError $error}
+    <p class="text-message-error">
+        {$error->getMessage()}
+    </p>
+</div>

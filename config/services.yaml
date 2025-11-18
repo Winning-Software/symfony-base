@@ -1,5 +1,8 @@
 parameters:
 
+imports:
+  - { resource: '../vendor/cloudbase/latte-helper/config/services.yaml' }
+
 services:
   _defaults:
     autowire: true
@@ -7,3 +10,21 @@ services:
 
   App\:
     resource: '../src/'
+
+  App\_Core\Controller\:
+    resource: '../src/_Core/Controller'
+    tags: [ 'controller.service_arguments' ]
+    calls:
+      - setLatteFactory: ['@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory']
+
+  App\Application\Controller\:
+    resource: '../src/Application/Controller'
+    tags: [ 'controller.service_arguments' ]
+    calls:
+      - setLatteFactory: ['@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory']
+
+  App\Auth\Controller\:
+    resource: '../src/Auth/Controller'
+    tags: [ 'controller.service_arguments' ]
+    calls:
+      - setLatteFactory: ['@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory']

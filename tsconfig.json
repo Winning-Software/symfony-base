@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "./public/assets/js",
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": []
+  },
+  "include": [
+    "assets/scripts/app.ts"
+  ]
+}

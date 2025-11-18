@@ -45,6 +45,11 @@ $envContent = preg_replace(
     'APP_NAME="' . addslashes($projectName) . '"',
     $envContent
 );
+$envContent = preg_replace(
+    '/^MAIL_FROM_NAME=.*$/m',
+    'MAIL_FROM_NAME="' . addslashes($projectName) . '"',
+    $envContent
+);
 file_put_contents($envFile, $envContent);
 
 // Update composer.json

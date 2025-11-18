@@ -1,0 +1,45 @@
+{extends '../../layouts/@core.layout.latte'}
+
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+{varType array $_ENV}
+
+{block content}
+    <div class="text-center bg-transparent border-3 border-auth-primary rounded-lg shadow-lg px-4 py-8 max-w-[400px] w-full">
+        <h1 class="text-3xl mb-6 font-bold">🎯 {$_ENV['APP_NAME']}</h1>
+        <p class="my-3">Welcome to your new Symfony application.</p>
+
+        <div class="p-2 rounded-md bg-auth-primary/65">
+            <h2 class="text-white font-bold mt-1">Application Health Check</h2>
+            <div class="health-check-container">
+                <i class="fa-solid fa-fan fa-spin fa-2x"></i>
+            </div>
+        </div>
+        <div n:if="$app->getUser()">
+            <div>
+                <p class="my-3">
+                    Logged in as <strong>{$app->getUser()->getUserIdentifier()}</strong>.
+                </p>
+            </div>
+
+            {var App\Auth\Entity\User|null $user = $app->getUser()}
+            <div n:if="$user instanceof App\Auth\Entity\User && !$user->isVerified()" class="bg-red-300 p-2 rounded-md border-2 border-red-500">
+                <p>
+                    Your email is not verified yet.
+                </p>
+            </div>
+            <div>
+                <p class="my-3">
+                    <a href="{$app->generateUrl('auth_logout')}" class="text-white font-medium hover:underline">Logout</a>
+                </p>
+            </div>
+        </div>
+        <div n:if="!$app->getUser()">
+            <p class="my-3">
+                <a href="{$app->generateUrl('auth_login')}" class="text-white font-medium hover:underline">Login</a> or <a href="{$app->generateUrl('auth_register')}" class="text-white font-medium hover:underline">Register</a>
+            </p>
+        </div>
+        <div class="mt-6 pt-6 text-sm border-t border-gray-700">
+            <p>Built with the Symfony Framework</p>
+        </div>
+    </div>
+{/block}

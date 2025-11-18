@@ -1,0 +1,12 @@
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+
+<!-- bg-message-success bg-message-error bg-message-info bg-message-warning -->
+{var $flashes = $app->getSession()->getFlashBag()->all()}
+
+<div n:if="!empty($flashes)" class="fixed top-8 right-8 transform z-50 space-y-2">
+    <div n:foreach="$flashes as $type => $messages">
+        <div n:foreach="$messages as $message" class="p-4 rounded-lg bg-message-{$type} text-white text-center opacity-0 translate-y-4 flash-message">
+            {$message}
+        </div>
+    </div>
+</div>

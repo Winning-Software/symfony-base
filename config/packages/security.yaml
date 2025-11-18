@@ -15,13 +15,17 @@ security:
     main:
       lazy: true
       provider: app_user_provider
-      # form_login:
-      #     login_path: login
-      #     check_path: login
+
+      custom_authenticators:
+        - App\Auth\Classes\Authentication\LoginFormAuthenticator
+
+      logout:
+        path: auth_logout
+        target: app_index
 
   access_control:
-  # - { path: ^/admin, roles: ROLE_ADMIN }
-  # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/auth, roles: PUBLIC_ACCESS }
+    - { path: ^/admin, roles: ROLE_ADMIN }
 
 when@test:
   security:
