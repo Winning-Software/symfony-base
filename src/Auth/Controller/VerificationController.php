@@ -19,6 +19,7 @@ class VerificationController extends AbstractApplicationController
 
         if (!is_string($token)) {
             $this->addFlash('error', 'Invalid verification link.');
+
             return $this->redirectToRoute('auth_login');
         }
 
@@ -26,10 +27,12 @@ class VerificationController extends AbstractApplicationController
 
         if (!$user) {
             $this->addFlash('error', 'Verification link is invalid or expired.');
+
             return $this->redirectToRoute('auth_login');
         }
 
         $this->addFlash('success', 'Your account is now verified. You can log in.');
+
         return $this->redirectToRoute('auth_login');
     }
 }

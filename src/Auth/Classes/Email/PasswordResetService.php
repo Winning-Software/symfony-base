@@ -6,8 +6,8 @@ namespace App\Auth\Classes\Email;
 
 use App\_Core\Controller\EmailBuilder;
 use App\_Core\Entity\EmailType;
-use App\Auth\Entity\User;
 use App\Auth\Entity\PasswordResetToken;
+use App\Auth\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -20,7 +20,8 @@ readonly class PasswordResetService
         private MailerInterface $mailer,
         private UrlGeneratorInterface $urlGenerator,
         private EmailBuilder $emailBuilder
-    ) {}
+    ) {
+    }
 
     /**
      * @throws \Exception|TransportExceptionInterface

@@ -21,7 +21,8 @@ readonly class EmailVerificationService
         private MailerInterface $mailer,
         private UrlGeneratorInterface $urlGenerator,
         private EmailBuilder $emailBuilder
-    ) {}
+    ) {
+    }
 
     /**
      * @throws \Exception|TransportExceptionInterface|RandomException

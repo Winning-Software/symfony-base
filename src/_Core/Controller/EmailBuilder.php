@@ -16,13 +16,9 @@ class EmailBuilder extends AbstractApplicationController
     }
 
     /**
-     * @param string $emailTypeHandle
-     * @param string $to
      * @param array<string, mixed> $templateOptions
      *
      * @throws \Exception
-     *
-     * @return Email
      */
     public function getEmail(string $emailTypeHandle, string $to, array $templateOptions = []): Email
     {

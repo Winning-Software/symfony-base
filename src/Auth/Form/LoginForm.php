@@ -22,7 +22,7 @@ class LoginForm extends AbstractType
                     'required' => true,
                     'attr' => [
                         'placeholder' => 'Enter your email address',
-                    ]
+                    ],
                 ]
             )
             ->add(

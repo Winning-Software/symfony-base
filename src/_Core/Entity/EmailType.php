@@ -14,8 +14,8 @@ use Doctrine\ORM\Mapping\Table;
 #[Table(name: 'ublEmailType', schema: 'Core')]
 class EmailType
 {
-    const string PASSWORD_RESET = 'PASSWORD_RESET';
-    const string VERIFY_EMAIL_ADDRESS = 'VERIFY_EMAIL_ADDRESS';
+    public const string PASSWORD_RESET = 'PASSWORD_RESET';
+    public const string VERIFY_EMAIL_ADDRESS = 'VERIFY_EMAIL_ADDRESS';
 
     #[Id]
     #[GeneratedValue]

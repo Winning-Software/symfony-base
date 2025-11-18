@@ -17,6 +17,7 @@ class HealthCheckController extends AbstractApplicationController
     {
         try {
             $entityManager->getConnection()->executeQuery('SELECT 1');
+
             return $this->json(['success' => true]);
         } catch (\Throwable $e) {
             return $this->json([
@@ -30,6 +31,7 @@ class HealthCheckController extends AbstractApplicationController
     {
         try {
             $entityManager->getRepository(User::class)->findAll();
+
             return $this->json(['success' => true]);
         } catch (\Exception $e) {
             return $this->json([

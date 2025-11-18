@@ -62,6 +62,7 @@ class ForgotPasswordController extends AbstractApplicationController
 
         if (!is_string($token)) {
             $this->addFlash('error', 'Invalid reset link.');
+
             return $this->redirectToRoute('auth_login');
         }
 
@@ -69,6 +70,7 @@ class ForgotPasswordController extends AbstractApplicationController
 
         if (!$user) {
             $this->addFlash('error', 'Reset link is invalid or expired.');
+
             return $this->redirectToRoute('auth_login');
         }
 
