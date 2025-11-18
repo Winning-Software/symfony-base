@@ -13,6 +13,6 @@ class IndexController extends AbstractApplicationController
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        return $this->renderTemplate('application/index');
+        return $this->renderTemplate('_core/pages/app/index', ['title' => 'Home']);
     }
 }

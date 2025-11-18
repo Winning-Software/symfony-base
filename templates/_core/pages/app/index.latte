@@ -1,20 +1,9 @@
-{varType array $_ENV}
+{extends '../../layouts/@core.layout.latte'}
+
 {varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+{varType array $_ENV}
 
-{var App\Auth\Entity\User $user = $app->getUser()}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to {$_ENV['APP_NAME']}</title>
-    {asset 'styles/styles.css'}
-    <script src="{$_ENV['FONTAWESOME_SCRIPT_URL']}" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="/favicon.png">
-</head>
-<body class="bg-animated-gradient bg-gradient-blur h-screen w-screen flex items-center justify-center overflow-hidden">
-    {include '../components/flash-messages.latte'}
+{block content}
     <div class="text-center bg-transparent border-3 border-auth-primary rounded-lg shadow-lg px-4 py-8 max-w-[400px] w-full">
         <h1 class="text-3xl mb-6 font-bold">🎯 {$_ENV['APP_NAME']}</h1>
         <p class="my-3">Welcome to your new Symfony application.</p>
@@ -52,6 +41,4 @@
             <p>Built with the Symfony Framework</p>
         </div>
     </div>
-    {asset 'scripts/app.js'}
-</body>
-</html>
+{/block}

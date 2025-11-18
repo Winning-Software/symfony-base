@@ -10,13 +10,18 @@ use App\Auth\Classes\Email\EmailVerificationService;
 use App\Auth\Entity\User;
 use App\Auth\Form\RegistrationForm;
 use Doctrine\ORM\EntityManagerInterface;
+use Random\RandomException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractApplicationController
 {
+    /**
+     * @throws TransportExceptionInterface|RandomException
+     */
     #[Route('/auth/register', name: 'auth_register')]
     public function register(
         Request $request,
@@ -50,7 +55,7 @@ class RegistrationController extends AbstractApplicationController
             }
         }
 
-        return $this->renderTemplate('auth/register.latte', [
+        return $this->renderTemplate('_core/pages/auth/register.latte', [
             'data' => $data,
             'form' => $form->createView(),
             'title' => 'Register',

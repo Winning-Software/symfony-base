@@ -18,7 +18,7 @@ class LoginController extends AbstractApplicationController
             return $this->redirectToRoute('app_index');
         }
 
-        return $this->renderTemplate('auth/login.latte', [
+        return $this->renderTemplate('_core/pages/auth/login.latte', [
             'form' => $this->createForm(LoginForm::class)->createView(),
             'title' => 'Login',
         ]);

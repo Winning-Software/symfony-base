@@ -45,10 +45,11 @@ class ForgotPasswordController extends AbstractApplicationController
             }
 
             $this->addFlash('success', 'If your email exists, a reset link has been sent.');
+
             return $this->redirectToRoute('auth_login');
         }
 
-        return $this->renderTemplate('auth/forgot-password.latte', [
+        return $this->renderTemplate('_core/pages/auth/forgot-password', [
             'title' => 'Request Password Reset',
             'form' => $form->createView(),
         ]);
@@ -86,7 +87,7 @@ class ForgotPasswordController extends AbstractApplicationController
         }
 
         return $this->renderTemplate(
-            'auth/password-reset',
+            '_core/pages/auth/password-reset',
             [
                 'token' => $token,
                 'title' => 'Reset Password',
