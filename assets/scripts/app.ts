@@ -1,9 +1,9 @@
+import AppHealthChecker from './Core/AppHealthChecker';
 import FlashHandler from './Core/FlashHandler';
 import InputManager from './Auth/InputManager';
-import AppHealthChecker from "./Core/AppHealthChecker";
 
 document.addEventListener('DOMContentLoaded', async () => {
+    new AppHealthChecker();
     new FlashHandler();
     new InputManager();
-    new AppHealthChecker();
 });

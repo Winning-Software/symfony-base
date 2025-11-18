@@ -17,7 +17,7 @@ security:
       provider: app_user_provider
 
       custom_authenticators:
-        - App\Security\LoginFormAuthenticator
+        - App\Auth\Classes\Authentication\LoginFormAuthenticator
 
       logout:
         path: auth_logout

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security;
+namespace App\Auth\Classes\Authentication;
 
 use App\Auth\Classes\DTO\LoginDTO;
 use App\Auth\Form\LoginForm;
