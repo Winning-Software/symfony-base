@@ -21,7 +21,8 @@
                 </p>
             </div>
 
-            <div n:if="!$user->isVerified()" class="bg-red-300 p-2 rounded-md border-2 border-red-500">
+            {var App\Auth\Entity\User|null $user = $app->getUser()}
+            <div n:if="$user instanceof App\Auth\Entity\User && !$user->isVerified()" class="bg-red-300 p-2 rounded-md border-2 border-red-500">
                 <p>
                     Your email is not verified yet.
                 </p>

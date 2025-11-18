@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Auth\Classes\Email;
 
+use App\_Core\Controller\EmailBuilder;
+use App\_Core\Entity\EmailType;
 use App\Auth\Entity\User;
 use App\Auth\Entity\VerificationToken;
 use Doctrine\ORM\EntityManagerInterface;
 use Random\RandomException;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 readonly class EmailVerificationService
@@ -18,11 +19,12 @@ readonly class EmailVerificationService
     public function __construct(
         private EntityManagerInterface $em,
         private MailerInterface $mailer,
-        private UrlGeneratorInterface $urlGenerator
+        private UrlGeneratorInterface $urlGenerator,
+        private EmailBuilder $emailBuilder
     ) {}
 
     /**
-     * @throws TransportExceptionInterface|RandomException
+     * @throws \Exception|TransportExceptionInterface|RandomException
      */
     public function sendVerificationEmail(User $user): void
     {
@@ -30,28 +32,22 @@ readonly class EmailVerificationService
         $this->em->persist($token);
         $this->em->flush();
 
-        $verificationUrl = $this->urlGenerator->generate(
-            'auth_verify_email',
-            ['token' => $token->getToken()],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
-
-        $email = (new Email())
-            ->from('no-reply@example.com')
-            ->to($user->getEmail())
-            ->subject('Verify your account')
-            ->html("
-                <p>Click the link below to verify your account:</p>
-                <p><a href='{$verificationUrl}'>Verify Account</a></p>
-            ");
-
-        $this->mailer->send($email);
+        $this->mailer->send($this->emailBuilder->getEmail(
+            EmailType::VERIFY_EMAIL_ADDRESS,
+            $user->getEmail(),
+            [
+                'verificationUrl' => $this->urlGenerator->generate(
+                    'auth_verify_email',
+                    ['token' => $token->getToken()],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+            ]
+        ));
     }
 
     public function verifyToken(string $token): ?User
     {
-        $repo = $this->em->getRepository(VerificationToken::class);
-        $tokenEntity = $repo->findOneBy(['token' => $token]);
+        $tokenEntity = $this->em->getRepository(VerificationToken::class)->findOneBy(['token' => $token]);
 
         if (!$tokenEntity || $tokenEntity->isExpired()) {
             return null;
