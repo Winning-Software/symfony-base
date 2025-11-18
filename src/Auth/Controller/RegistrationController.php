@@ -32,11 +32,11 @@ class RegistrationController extends AbstractApplicationController
         $form = $this->createForm(RegistrationForm::class, $data);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $existingUser = $em->getRepository(User::class)->findOneBy(['email' => $data->getEmail()]);
             $data->setUserExists($existingUser instanceof User);
 
-            if ($data->validate()) {
+            if ($form->isValid() && $data->validate()) {
                 $user = User::create($data, $passwordHasher);
 
                 $em->persist($user);

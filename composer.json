@@ -7,7 +7,7 @@
   "require": {
     "php": ">=8.3",
     "cloudbase/asset-node": "^1.0",
-    "cloudbase/latte-helper": "dev-dev",
+    "cloudbase/latte-helper": "^1.2.0",
     "doctrine/dbal": "^4.3",
     "doctrine/doctrine-bundle": "^2.18",
     "doctrine/orm": "^3.5",

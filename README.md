@@ -7,7 +7,7 @@
 <img src="https://img.shields.io/badge/License-GPL--3.0--or--later-40adbc" alt="License GPL-3.0-or-later">
 </p>
 
-A highly opinionated, ready-to-use Symfony 7.3 project template with the Latte templating engine.
+A _highly opinionated_, ready-to-use Symfony 7.3 project template with the Latte templating engine.
 
 ## Installation
 
@@ -19,6 +19,7 @@ composer create-project cloudbase/symfony-base my-project
 
 - Symfony 7.3
 - Latte Templating Engine
+- Full Authentication System: Login, Registration, Password Reset and Email Verification
 - Doctrine ORM/DBAL
 - NPM with Webpack
 - TailwindCSS

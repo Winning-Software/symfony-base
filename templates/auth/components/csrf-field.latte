@@ -1,0 +1,4 @@
+{varType CloudBase\LatteHelper\Classes\LatteAwareApplication $app}
+{var string $formName = $form->vars['name']}
+
+<input type="hidden" name="{$formName}[_token]" value="{$app->getCsrf($formName)}">

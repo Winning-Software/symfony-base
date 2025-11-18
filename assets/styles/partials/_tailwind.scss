@@ -1,7 +1,7 @@
 @use 'tailwindcss';
 
 @theme {
-  --color-message-success: #42a04b;
+  --color-message-success: #5db677;
   --color-message-error: #e47070;
   --color-message-info: #508ac8;
   --color-message-warning: #ff9426;
@@ -9,17 +9,36 @@
 
 @layer utilities {
   .bg-animated-gradient {
-    background: linear-gradient(-45deg, theme('colors.indigo.900'), theme('colors.indigo.700'), theme('colors.purple.800'), theme('colors.violet.500'), theme('colors.teal.400'));
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    background: linear-gradient(-45deg,
+      color-mix(in srgb, theme('colors.purple.700') 75%, transparent),
+      color-mix(in srgb, theme('colors.purple.600') 75%, transparent),
+      color-mix(in srgb, theme('colors.violet.600') 75%, transparent),
+      color-mix(in srgb, theme('colors.violet.400') 75%, transparent),
+    );
+    background-size: 300% 300%;
+    animation: gradient 12s ease-in-out infinite;
+  }
+  .bg-gradient-blur::before {
+    @apply absolute bg-inherit;
+    content: "";
+    inset: -20%;
+    filter: blur(60px);
+    transform: scale(1.2);
+    z-index: -1;
   }
 
   @keyframes gradient {
-    0%, 100% {
+    0% {
       background-position: 0 50%;
     }
-    50% {
+    33% {
+      background-position: 50% 100%;
+    }
+    66% {
       background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0 50%;
     }
   }
 }

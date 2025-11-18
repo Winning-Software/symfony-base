@@ -6,15 +6,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to {$_ENV['APP_NAME']}</title>
-    {asset 'styles/styles.css'}
-</head>
-<body>
-    {include 'components/flash-messages.latte'}
 
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-            <h1 class="text-2xl font-bold mb-6">{$title ?? 'N/A'}</h1>
+    <title>{$title} | {$_ENV['APP_NAME']}</title>
+
+    {asset 'styles/styles.css'}
+    <script src="{$_ENV['FONTAWESOME_SCRIPT_URL']}" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body class="bg-animated-gradient bg-gradient-blur h-screen w-screen flex items-center justify-center overflow-hidden">
+    {include 'components/flash-messages.latte'}
+    <a class="fixed top-4 left-4 py-2 px-4 rounded-2xl bg-purple-900 text-white font-light transition duration-150 hover:bg-purple-800" href="{$app->generateUrl('app_index')}">
+        <i class="fa fa-arrow-left fa-sm"></i> Return to Homepage
+    </a>
+
+    <div class="flex items-center justify-center rounded-lg border-3 border-purple-900">
+        <div class="bg-transparent p-8 rounded-xl shadow-md w-full max-w-md">
+            <h1 class="text-2xl font-bold mb-6 text-center">{$title}</h1>
 
             {block content}{/block}
         </div>

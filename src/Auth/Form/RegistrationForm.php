@@ -7,7 +7,6 @@ namespace App\Auth\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationForm extends AbstractType
@@ -20,6 +19,9 @@ class RegistrationForm extends AbstractType
             [
                 'label' => 'Email Address',
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Enter your email address',
+                ],
             ]
         );
         $builder->add(
@@ -28,6 +30,9 @@ class RegistrationForm extends AbstractType
             [
                 'label' => 'Password',
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Enter your password',
+                ],
             ]
         );
         $builder->add(
@@ -36,6 +41,9 @@ class RegistrationForm extends AbstractType
             [
                 'label' => 'Confirm Password',
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Confirm your password',
+                ],
             ]
         );
     }

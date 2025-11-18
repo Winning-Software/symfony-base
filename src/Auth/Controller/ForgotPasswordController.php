@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Auth\Controller;
 
 use App\Application\Controller\AbstractApplicationController;
+use App\Auth\Classes\DTO\RequestPasswordResetDTO;
 use App\Auth\Classes\Email\PasswordResetService;
 use App\Auth\Entity\User;
+use App\Auth\Form\RequestPasswordResetLinkForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +20,12 @@ class ForgotPasswordController extends AbstractApplicationController
     #[Route('/auth/password-reset/request', name: 'auth_forgot_password')]
     public function requestNewPassword(Request $request, EntityManagerInterface $em, PasswordResetService $service): Response
     {
-        if ($request->isMethod('POST')) {
-            $email = $request->request->get('email');
-            $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
+        $data = new RequestPasswordResetDTO();
+        $form = $this->createForm(RequestPasswordResetLinkForm::class, $data);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $em->getRepository(User::class)->findOneBy(['email' => $data->getEmail()]);
 
             if ($user instanceof User) {
                 $service->sendResetEmail($user);
@@ -32,6 +37,7 @@ class ForgotPasswordController extends AbstractApplicationController
 
         return $this->renderTemplate('auth/forgot-password.latte', [
             'title' => 'Request Password Reset',
+            'form' => $form->createView(),
         ]);
     }
 
