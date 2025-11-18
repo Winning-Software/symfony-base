@@ -4,6 +4,7 @@
 /var/
 /vendor/
 /node_modules/
+/package-lock.json
 /composer.lock
 /.php-cs-fixer.cache
 /public/assets/
