@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity;
 
-use App\Application\Entity\AbstractBaseEntity;
+use App\_Core\Entity\AbstractBaseEntity;
 use App\Auth\Classes\DTO\RegistrationDTO;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

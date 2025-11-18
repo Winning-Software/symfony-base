@@ -7,6 +7,8 @@ namespace App\Auth\Classes\Email;
 use App\Auth\Entity\User;
 use App\Auth\Entity\VerificationToken;
 use Doctrine\ORM\EntityManagerInterface;
+use Random\RandomException;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -19,6 +21,9 @@ readonly class EmailVerificationService
         private UrlGeneratorInterface $urlGenerator
     ) {}
 
+    /**
+     * @throws TransportExceptionInterface|RandomException
+     */
     public function sendVerificationEmail(User $user): void
     {
         $token = VerificationToken::create($user);

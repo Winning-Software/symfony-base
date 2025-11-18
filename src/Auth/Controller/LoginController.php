@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Controller;
 
-use App\Application\Controller\AbstractApplicationController;
+use App\_Core\Controller\AbstractApplicationController;
 use App\Auth\Form\LoginForm;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

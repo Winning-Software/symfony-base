@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Entity;
+namespace App\_Core\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;

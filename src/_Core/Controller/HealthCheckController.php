@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Controller;
+namespace App\_Core\Controller;
 
 use App\Auth\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +18,7 @@ class HealthCheckController extends AbstractApplicationController
         try {
             $entityManager->getConnection()->executeQuery('SELECT 1');
             return $this->json(['success' => true]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->json([
                 'success' => false,
             ], 500);
