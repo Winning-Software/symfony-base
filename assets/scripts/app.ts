@@ -1,20 +1,9 @@
 import FlashHandler from './Core/FlashHandler';
+import InputManager from "./Auth/InputManager";
 
 document.addEventListener('DOMContentLoaded', async () => {
     new FlashHandler();
-
-    const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
-
-    inputs.forEach((input: HTMLInputElement) => {
-        input.addEventListener('focus', () => {
-            if (input.classList.contains('border-red-500')) {
-                input.classList.add('border-gray-200');
-                input.classList.remove('border-red-500');
-
-                input.nextElementSibling?.remove();
-            }
-        });
-    });
+    new InputManager();
 
     const healthCheckContainer: HTMLElement|null = document.querySelector('.health-check-container');
 

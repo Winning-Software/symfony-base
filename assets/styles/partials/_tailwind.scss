@@ -2,9 +2,10 @@
 
 @theme {
   --color-message-success: #5db677;
-  --color-message-error: #e47070;
+  --color-message-error: #aa1515;
   --color-message-info: #508ac8;
   --color-message-warning: #ff9426;
+  --color-auth-primary: theme('colors.purple.900');
 }
 
 @layer utilities {
