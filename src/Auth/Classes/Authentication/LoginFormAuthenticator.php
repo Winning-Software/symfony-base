@@ -78,6 +78,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($flashBag instanceof FlashBag) {
             $flashBag->add('error', 'Invalid credentials');
         }
+
         return new RedirectResponse($this->router->generate('auth_login'));
     }
 }
