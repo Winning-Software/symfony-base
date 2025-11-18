@@ -16,12 +16,9 @@
         {include 'components/form-field.latte', type: 'password', field: $form['confirm_password'], errors: [
             'Passwords do not match' => !$data->passwordsMatch(),
         ]}
-
-        <input type="hidden" name="registration_form[_token]" value="{$app->getCsrf('registration_form')}">
-
+        {include 'components/csrf-field.latte', form: $form}
         {include 'components/submit-button.latte', text: 'Register'}
     </form>
-
     <div>
         <p class="my-3 text-center">
             Already have an account? <a href="{$app->generateUrl('auth_login')}" class="text-white font-medium hover:underline">Log in</a>.

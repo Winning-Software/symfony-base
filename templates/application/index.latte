@@ -15,12 +15,15 @@
 </head>
 <body class="bg-animated-gradient bg-gradient-blur h-screen w-screen flex items-center justify-center overflow-hidden">
     {include '../components/flash-messages.latte'}
-    <div class="text-center bg-white/80 rounded-lg shadow-lg px-4 py-8 max-w-[400px] w-full">
+    <div class="text-center bg-transparent border-3 border-auth-primary rounded-lg shadow-lg px-4 py-8 max-w-[400px] w-full">
         <h1 class="text-3xl mb-6 font-bold">🎯 {$_ENV['APP_NAME']}</h1>
         <p class="my-3">Welcome to your new Symfony application.</p>
 
-        <div class="health-check-container">
-            <i class="fa-solid fa-fan fa-spin fa-2x"></i>
+        <div class="p-2 rounded-md bg-auth-primary/65">
+            <h2 class="text-white font-bold mt-1">Application Health Check</h2>
+            <div class="health-check-container">
+                <i class="fa-solid fa-fan fa-spin fa-2x"></i>
+            </div>
         </div>
         <div n:if="$app->getUser()">
             <div>
@@ -36,13 +39,13 @@
             </div>
             <div>
                 <p class="my-3">
-                    <a href="{$app->generateUrl('auth_logout')}" class="text-blue-600 hover:underline">Logout</a>
+                    <a href="{$app->generateUrl('auth_logout')}" class="text-white font-medium hover:underline">Logout</a>
                 </p>
             </div>
         </div>
         <div n:if="!$app->getUser()">
             <p class="my-3">
-                <a href="{$app->generateUrl('auth_login')}" class="text-blue-600 hover:underline">Login</a> or <a href="{$app->generateUrl('auth_register')}" class="text-blue-600 hover:underline">Register</a>
+                <a href="{$app->generateUrl('auth_login')}" class="text-white font-medium hover:underline">Login</a> or <a href="{$app->generateUrl('auth_register')}" class="text-white font-medium hover:underline">Register</a>
             </p>
         </div>
         <div class="mt-6 pt-6 text-sm border-t border-gray-700">

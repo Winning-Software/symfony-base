@@ -10,12 +10,9 @@
     <form method="post" class="space-y-5 mt-6">
         {include 'components/form-field.latte', type: 'email', field: $form['email']}
         {include 'components/form-field.latte', type: 'password', field: $form['password']}
-
-        <input type="hidden" name="login_form[_token]" value="{$app->getCsrf('login_form')}">
-
+        {include 'components/csrf-field.latte', form: $form}
         {include 'components/submit-button.latte', text: 'Login'}
     </form>
-
     <div>
         <p class="my-3 text-center">
             Forgotten your password? <a href="{$app->generateUrl('auth_forgot_password')}" class="text-white font-medium hover:underline">Reset Password</a>.
